@@ -1,38 +1,26 @@
-package com.devsuperior.entities;
+package com.devsuperior.dto;
 
-import jakarta.persistence.*;
+import com.devsuperior.entities.Game;
+import jakarta.persistence.Column;
+import org.springframework.beans.BeanUtils;
 
-import java.util.Objects;
-@Entity
-@Table(name = "tb_game")
-public class Game {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GameDto {
     private Long id;
     private String title;
-    @Column(name = "game_year")
     private Integer year;
     private String genre;
     private String platforms;
     private double score;
     private String imgUrl;
-    @Column(columnDefinition = "TEXT")
     private String shortDescription;
-    @Column(columnDefinition = "TEXT")
     private String longDescription;
-    public Game(Long id, String title, Integer year, String genre, String platforms, Double score, String imgUrl, String shortDescription, String longDescription) {
-        this.id = id;
-        this.title = title;
-        this.year = year;
-        this.genre = genre;
-        this.platforms = platforms;
-        this.imgUrl = imgUrl;
-        this.shortDescription = shortDescription;
-        this.longDescription = longDescription;
+
+    public GameDto() {
     }
 
-    public Game() {
-
+    //Bean copia tudo
+    public GameDto(Game entity){
+        BeanUtils.copyProperties(entity, this);
     }
 
     public Long getId() {
@@ -71,8 +59,8 @@ public class Game {
         return platforms;
     }
 
-    public void setPlatforms(String platform) {
-        this.platforms = platform;
+    public void setPlatforms(String platforms) {
+        this.platforms = platforms;
     }
 
     public double getScore() {
@@ -105,18 +93,5 @@ public class Game {
 
     public void setLongDescription(String longDescription) {
         this.longDescription = longDescription;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Game game = (Game) o;
-        return Objects.equals(id, game.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

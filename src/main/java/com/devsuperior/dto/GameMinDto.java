@@ -3,6 +3,7 @@ package com.devsuperior.dto;
 import com.devsuperior.entities.Game;
 import jakarta.persistence.Column;
 
+//Versão do game com 5 entidades apenas
 public class GameMinDto {
     private Long id;
     private String title;
