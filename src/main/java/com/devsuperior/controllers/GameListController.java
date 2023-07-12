@@ -4,6 +4,7 @@ package com.devsuperior.controllers;
 import com.devsuperior.dto.GameDto;
 import com.devsuperior.dto.GameListDto;
 import com.devsuperior.dto.GameMinDto;
+import com.devsuperior.entities.Game;
 import com.devsuperior.entities.GameList;
 import com.devsuperior.services.GamesListService;
 import com.devsuperior.services.GamesService;
@@ -22,9 +23,18 @@ public class GameListController {
     @Autowired
     private GamesListService gamesListService;
 
+    @Autowired
+    private GamesService gamesService;
+
     @GetMapping
     public List<GameListDto> findAll(){
         List<GameListDto> result = gamesListService.findAll();
+        return result;
+    }
+
+    @GetMapping(value = "/{listId}/games")
+    public List<GameMinDto> findByList(@PathVariable Long listId){
+        List<GameMinDto> result = gamesService.findByList(listId);
         return result;
     }
 

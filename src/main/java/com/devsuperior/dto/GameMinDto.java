@@ -1,6 +1,7 @@
 package com.devsuperior.dto;
 
 import com.devsuperior.entities.Game;
+import com.devsuperior.projections.GameMinProjection;
 import jakarta.persistence.Column;
 
 //Versão do game com 5 entidades apenas
@@ -20,6 +21,14 @@ public class GameMinDto {
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
         shortDescription = entity.getShortDescription();
+    }
+
+    public GameMinDto(GameMinProjection projection) {
+        id = projection.getId();
+        title = projection.getTitle();
+        year = projection.getYear();
+        imgUrl = projection.getImgUrl();
+        shortDescription = projection.getShortDescription();
     }
 
     public Long getId() {
